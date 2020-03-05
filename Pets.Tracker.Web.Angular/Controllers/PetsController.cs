@@ -31,16 +31,33 @@ namespace Pets.Tracker.Web.Angular.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pet>>> GetPets()
         {
-            return await _context.Pets.ToListAsync();
+            var user = GetCurrentUser();
+
+            if (user == null)
+                return NotFound();
+
+            return await _context.Pets.Where(pet => pet.OwnerId == user).ToListAsync();
+        }
+
+        [NonAction]
+        private string GetCurrentUser()
+        {
+            if (HttpContext.User == null)
+                return null; 
+
+            //var userContext = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
 
         // GET: api/Pets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Pet>> GetPet(int id)
         {
+            var user = GetCurrentUser();
             var pet = await _context.Pets.FindAsync(id);
 
-            if (pet == null)
+
+            if (pet == null || pet.OwnerId != user)
             {
                 return NotFound();
             }

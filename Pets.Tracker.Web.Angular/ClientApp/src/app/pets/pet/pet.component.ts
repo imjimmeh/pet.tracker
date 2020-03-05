@@ -35,8 +35,12 @@ export class PetComponent {
 
     load() {
         this.http.get<Pet>(this.baseUrl + this.extendedUrl + "/" + this.petId).subscribe(result => {
-            this.pet = result;
-        }, error => console.error(error));
+          this.pet = result;
+          this.newPetForm.patchValue({
+            dateOfBirth: this.pet.dateOfBirth,
+            gender: this.pet.gender
+          });
+;        }, error => console.error(error));
     }
 
     ngOnInit() {

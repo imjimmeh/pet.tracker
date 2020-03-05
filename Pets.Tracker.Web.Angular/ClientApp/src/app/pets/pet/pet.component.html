@@ -20,12 +20,12 @@
 
         <div class="form-group">
           <label for="nickname">Nickname</label>
-          <input type="text" class="form-control" formControlName="nickname">
+          <input type="text" class="form-control" formControlName="nickname" [value]="pet.nickname">
         </div>
 
         <div class="form-group">
           <label for="dateOfBirth">Birthday</label>
-          <input type="date" class="form-control" formControlName="dateOfBirth">
+          <input type="date" class="form-control" formControlName="dateOfBirth"  [value]="pet.dateOfBirth">
         </div>
 
         <div class="form-group">
@@ -42,12 +42,12 @@
           <label for="animalId">Breed</label>
           <select formControlName="animalId" class="form-control" (change)="loadBreeds()">
             <option *ngFor="let animal of animals;"
-                    [ngValue]="animal.id">
+                    [ngValue]="animal.id" [selected]="pet.animalId == animal.id">
               {{animal.name}}
             </option>
           </select>
         </div>
-
+         
         <div class="form-group">
           <label for="breedId">Breed</label>
           <select formControlName="breedId" class="form-control">

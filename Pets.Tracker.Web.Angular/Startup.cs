@@ -31,7 +31,7 @@ namespace Pets.Tracker.Web.Angular
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<PetsTrackerUser>(options => { options.SignIn.RequireConfirmedAccount = true; })
-                .AddEntityFrameworkStores<UsersDbContext>();
+                .AddEntityFrameworkStores<UsersDbContext>().AddDefaultTokenProviders();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<PetsTrackerUser, UsersDbContext>();

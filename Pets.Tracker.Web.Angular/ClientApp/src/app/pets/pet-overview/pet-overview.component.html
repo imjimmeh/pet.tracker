@@ -1,4 +1,5 @@
-<p *ngIf="!pets"><em>Loading...</em></p>
+<p *ngIf="!pets && !responseReceived"><em>Loading...</em></p>
+<p *ngIf="!pets && responseReceived"><em>{{errorMessage}}</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pets">
   <thead>
@@ -79,6 +80,6 @@
   </form>
 </ng-template>
 
-<button class="btn" (click)="open(content)">Add New Pet</button>
+<button class="btn btn-primary" (click)="open(content)">Add New Pet</button>
 
 <hr>

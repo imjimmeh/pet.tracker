@@ -18,13 +18,16 @@ export class PetOverviewComponent {
     baseUrl: string;
     extendedUrl: string;
     closeResult: string;
+  responseReceived: boolean;
+  errorCode: number;
+  errorMessage: string;
 
     genders = [{ id: 0, value: "Male" }, { id: 1, value: "Female" }, { id: 2, value: "Other" }, { id: 3, value: "Unspecified" }];
 
     newPetForm = new FormGroup({
         name: new FormControl(''),
-      dateOfBirth: new FormControl(''),
-      nickname: new FormControl(''),
+        dateOfBirth: new FormControl(''),
+        nickname: new FormControl(''),
         gender: new FormControl(''),
         animalId: new FormControl(''),
         breedId: new FormControl('')
@@ -39,13 +42,26 @@ export class PetOverviewComponent {
 
     load() {
         this.http.get<Pet[]>(this.baseUrl + this.extendedUrl).subscribe(result => {
-            this.pets = result;
+          this.pets = result;
+          this.responseReceived = true;
             this.http.get<Animal[]>(this.baseUrl + "api/Animals").subscribe(result => {
                 this.animals = result;
                 this.loadAnimalNames();
             }, error => console.error(error));
-        }, error => console.error(error));
+        }, error => this.processError(error));
     }
+
+  processError(error) {
+    this.responseReceived = true;
+    this.errorCode = error.status;
+    if (this.errorCode == 404) {
+      this.errorMessage = "You have no pets yet! Please add some! :)";
+    }
+    else {
+      this.errorMessage = "Sorry but there appears to have been an error! Please try refreshing the page";
+    }
+
+  }
 
     loadAnimalNames() {
         for (var x = 0; x < this.animals.length; x++) {
