@@ -1,0 +1,17 @@
+<h1>ADMIN</h1>
+<div class="row" id="selectionRow">
+  <select  [(ngModel)]="selectedIndex">
+    <option *ngFor="let element of DatabaseComponents;  let i = index"
+            [ngValue]="i" >
+      {{element.TableName}}
+    </option>
+  </select>
+</div>
+<div class="row" id="container">
+  <div *ngIf="DatabaseComponents[selectedIndex].TableName == 'Animals'">
+  <app-animals></app-animals>
+  </div>
+  <div *ngIf="DatabaseComponents[selectedIndex].TableName == 'Breeds'">
+    <app-breeds></app-breeds>
+  </div>
+</div>

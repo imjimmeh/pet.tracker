@@ -1,0 +1,78 @@
+<p *ngIf="!pets"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pets">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Animal</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pet of pets">
+      <td><a [routerLink]="['pet', pet.id]">{{ pet.name }}</a></td>
+      <td>{{ pet.animal }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Pet</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="newPetForm" (ngSubmit)="submit()">
+    <div class="modal-body">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Birthday</label>
+        <input type="date" class="form-control" formControlName="dateOfBirth">
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select formControlName="gender" class="form-control">
+          <option *ngFor="let gender of genders;"
+                  [ngValue]="gender.id">
+            {{gender.value}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="animalId">Breed</label>
+        <select formControlName="animalId" class="form-control" (change)="loadBreeds()">
+          <option *ngFor="let animal of animals;"
+                  [ngValue]="animal.id">
+            {{animal.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="breedId">Breed</label>
+        <select formControlName="breedId" class="form-control">
+          <option *ngFor="let breed of breeds;"
+                  [ngValue]="breed.id">
+            {{breed.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</ng-template>
+
+<button class="btn" (click)="open(content)">Add New Pet</button>
+
+<hr>

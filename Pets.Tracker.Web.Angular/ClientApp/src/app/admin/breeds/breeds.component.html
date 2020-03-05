@@ -1,0 +1,47 @@
+<p *ngIf="!breeds || !animals"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="breeds && animals">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Animal</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let breed of breeds">
+      <td>{{ breed.name }}</td>
+      <td>{{ breed.description }}</td>
+      <td>{{ breed.animal }}</td>
+      <td><span class="fakeLink" (click)="delete(breed.id)">Delete</span></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<form [formGroup]="newAnimalForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" formControlName="description">
+  </div>
+
+  <div class="form-group">
+    <label for="selectedAnimal">Animal</label>
+    <select formControlName="animalId">
+      <option [ngValue]="null">Choose an animal</option>
+      <option *ngFor="let animal of animals;"
+              [ngValue]="animal.id">
+        {{animal.name}}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>

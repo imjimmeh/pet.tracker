@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pets.Tracker.Shared.Models", "Pets.Tracker.Shared.Models\Pets.Tracker.Shared.Models.csproj", "{14961C1F-2004-4396-88EA-6C57F595B25A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pets.Tracker.Web.Angular", "Pets.Tracker.Web.Angular\Pets.Tracker.Web.Angular.csproj", "{E703B159-BC49-4113-B51A-F5AB602D6BE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14961C1F-2004-4396-88EA-6C57F595B25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14961C1F-2004-4396-88EA-6C57F595B25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14961C1F-2004-4396-88EA-6C57F595B25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14961C1F-2004-4396-88EA-6C57F595B25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E703B159-BC49-4113-B51A-F5AB602D6BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E703B159-BC49-4113-B51A-F5AB602D6BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E703B159-BC49-4113-B51A-F5AB602D6BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E703B159-BC49-4113-B51A-F5AB602D6BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1ECE9DA3-54D9-426F-9CE9-418DEE899DD4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+}
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-users-tab" data-toggle="pill" href="#v-pills-users" role="tab" aria-controls="v-pills-users" aria-selected="true">Users</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                <a class="nav-link" id="v-pills-database-tab" data-toggle="pill" href="#v-pills-database" role="tab" aria-controls="v-pills-database" aria-selected="false">Database</a>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab">
+                </div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                </div>
+                <div class="tab-pane fade" id="v-pills-database" role="tabpanel" aria-labelledby="v-pills-database-tab">
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts
+{
+    <script>
+        var ajaxSettings = {
+            urlsToParse: [
+                {  "partialName" : "database",
+                    "url": "@Url.Action("DatabaseManagement","Main", new {Area = "Admin" }, null)"
+                },
+
+            ],
+            "ajaxTabClassName": "nav-link",
+            "ajaxContainerClassName": "tab-pane",
+           "rootPath": "@Url.Content("~")"
+        };
+        let adminAjaxTabController = new AjaxTabController(ajaxSettings);
+        adminAjaxTabController.initialise();
+    </script>
+}
