@@ -15,7 +15,7 @@ namespace Pets.Tracker.Shared.Models.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -417,19 +417,22 @@ namespace Pets.Tracker.Shared.Models.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AnimalId")
+                    b.Property<int>("AnimalId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BreedId")
+                    b.Property<int>("BreedId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerId")
@@ -630,7 +633,7 @@ namespace Pets.Tracker.Shared.Models.Migrations
                     b.HasOne("Pets.Tracker.Shared.Models.Pets.Animals.Animal", "Animal")
                         .WithMany("Breeds")
                         .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -670,11 +673,15 @@ namespace Pets.Tracker.Shared.Models.Migrations
                 {
                     b.HasOne("Pets.Tracker.Shared.Models.Pets.Animals.Animal", "Animal")
                         .WithMany("Pets")
-                        .HasForeignKey("AnimalId");
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Pets.Tracker.Shared.Models.Pets.Breeds.Breed", "Breed")
                         .WithMany("Pets")
-                        .HasForeignKey("BreedId");
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Pets.Tracker.Shared.Models.Users.PetsTrackerUser", "Owner")
                         .WithMany("UserPets")

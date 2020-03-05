@@ -23,7 +23,8 @@ export class PetOverviewComponent {
 
     newPetForm = new FormGroup({
         name: new FormControl(''),
-        dateOfBirth: new FormControl(''),
+      dateOfBirth: new FormControl(''),
+      nickname: new FormControl(''),
         gender: new FormControl(''),
         animalId: new FormControl(''),
         breedId: new FormControl('')

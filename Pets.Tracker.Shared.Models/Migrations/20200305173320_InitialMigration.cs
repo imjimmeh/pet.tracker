@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pets.Tracker.Shared.Models.Migrations
 {
-    public partial class ValidationsAdded : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,7 +117,7 @@ namespace Pets.Tracker.Shared.Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    AnimalId = table.Column<int>(nullable: true)
+                    AnimalId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,8 +126,7 @@ namespace Pets.Tracker.Shared.Models.Migrations
                         name: "FK_Breeds_Animals_AnimalId",
                         column: x => x.AnimalId,
                         principalTable: "Animals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -243,10 +242,11 @@ namespace Pets.Tracker.Shared.Models.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Nickname = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
-                    BreedId = table.Column<int>(nullable: true),
-                    AnimalId = table.Column<int>(nullable: true),
+                    BreedId = table.Column<int>(nullable: false),
+                    AnimalId = table.Column<int>(nullable: false),
                     OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -256,14 +256,12 @@ namespace Pets.Tracker.Shared.Models.Migrations
                         name: "FK_Pets_Animals_AnimalId",
                         column: x => x.AnimalId,
                         principalTable: "Animals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Pets_Breeds_BreedId",
                         column: x => x.BreedId,
                         principalTable: "Breeds",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Pets_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,

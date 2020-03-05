@@ -38,9 +38,9 @@ namespace Pets.Tracker.Shared.Models.Contexts
             base.OnModelCreating(builder);
 
             builder.Entity<PetsTrackerUser>().HasMany(u => u.UserPets).WithOne(p => p.Owner).HasForeignKey(p => p.OwnerId);
-            builder.Entity<Pet>().HasOne(p => p.Animal).WithMany(a => a.Pets);
-            builder.Entity<Pet>().HasOne(p => p.Breed).WithMany(b => b.Pets);
-            builder.Entity<Animal>().HasMany(a => a.Breeds).WithOne(b => b.Animal);
+            builder.Entity<Pet>().HasOne(p => p.Animal).WithMany(a => a.Pets).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Pet>().HasOne(p => p.Breed).WithMany(b => b.Pets).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Animal>().HasMany(a => a.Breeds).WithOne(b => b.Animal).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<GroomingRecord>().HasOne(g => g.Pet).WithMany(p => p.GroomingRecords);
             builder.Entity<ToiletRecord>().HasOne(t => t.Pet).WithMany(p => p.ToiletRecords);
             builder.Entity<MeasurementsRecord>().HasOne(m => m.Pet).WithMany(p => p.MeasurementRecords);

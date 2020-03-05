@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Pet } from 'src/app/pets/pet';
 
@@ -13,7 +14,18 @@ export class PetComponent {
     http: HttpClient;
     baseUrl: string;
     @Input() petId: number; 
-    extendedUrl: string;
+  extendedUrl: string;
+
+  genders = [{ id: 0, value: "Male" }, { id: 1, value: "Female" }, { id: 2, value: "Other" }, { id: 3, value: "Unspecified" }];
+
+  newPetForm = new FormGroup({
+    name: new FormControl(''),
+    dateOfBirth: new FormControl(''),
+    nickname: new FormControl(''),
+    gender: new FormControl(''),
+    animalId: new FormControl(''),
+    breedId: new FormControl('')
+  });
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute) {
         this.http = http;

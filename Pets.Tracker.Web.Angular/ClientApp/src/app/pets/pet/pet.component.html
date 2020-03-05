@@ -1,5 +1,67 @@
 <p *ngIf="!pet"><em>Loading...</em></p>
 
 <div *ngIf="pet">
-  {{pet.name}}
+  <div class="row" *ngIf="pet.nickname != null">
+    <h1><strong>{{pet.name}}</strong>, the <strong>{{pet.nickname}}</strong></h1>
+  </div>
+
+  <div class="row" *ngIf="pet.nickname == null">
+    <h1><strong>{{pet.name}}</strong></h1>
+  </div>
+
+  <div class="row" id="petDetailsForm">
+    <form [formGroup]="newPetForm" (ngSubmit)="submit()">
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" formControlName="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nickname">Nickname</label>
+          <input type="text" class="form-control" formControlName="nickname">
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Birthday</label>
+          <input type="date" class="form-control" formControlName="dateOfBirth">
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select formControlName="gender" class="form-control">
+            <option *ngFor="let gender of genders;"
+                    [ngValue]="gender.id">
+              {{gender.value}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="animalId">Breed</label>
+          <select formControlName="animalId" class="form-control" (change)="loadBreeds()">
+            <option *ngFor="let animal of animals;"
+                    [ngValue]="animal.id">
+              {{animal.name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breedId">Breed</label>
+          <select formControlName="breedId" class="form-control">
+            <option *ngFor="let breed of breeds;"
+                    [ngValue]="breed.id">
+              {{breed.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>
+

@@ -37,6 +37,12 @@
         <input type="date" class="form-control" formControlName="dateOfBirth">
       </div>
 
+
+      <div class="form-group">
+        <label for="nickname">Nickname</label>
+        <input class="form-control" formControlName="nickname">
+      </div>
+
       <div class="form-group">
         <label for="gender">Gender</label>
         <select formControlName="gender" class="form-control">
@@ -48,7 +54,7 @@
       </div>
 
       <div class="form-group">
-        <label for="animalId">Breed</label>
+        <label for="animalId">Animal Type</label>
         <select formControlName="animalId" class="form-control" (change)="loadBreeds()">
           <option *ngFor="let animal of animals;"
                   [ngValue]="animal.id">
